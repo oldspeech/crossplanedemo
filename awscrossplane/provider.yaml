@@ -1,0 +1,9 @@
+# Install the AWS Provider.
+#   - Install all the CRDs required to create resources on the cloud
+
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: aws-provider
+spec:
+  package: crossplane/provider-aws:v0.19.0

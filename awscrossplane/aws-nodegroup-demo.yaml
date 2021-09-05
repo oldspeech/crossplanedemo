@@ -1,0 +1,31 @@
+apiVersion: eks.aws.crossplane.io/v1alpha1
+kind: NodeGroup
+metadata:
+  name: challengeaws-nodegroup
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    amiType: AL2_x86_64
+    clusterName: challengeaws-cluster
+    clusterNameRef:
+      name: challengeaws-cluster
+    clusterNameSelector:
+      matchControllerRef: true
+    diskSize: 100
+    nodeRole: 
+    nodeRoleRef:
+      name: challengeaws-nodegroup
+    nodeRoleSelector:
+      matchControllerRef: true
+    region: us-east-2
+    scalingConfig:
+      desiredSize: 1
+      maxSize: 2
+      minSize: 1
+    subnetRefs:
+      - name: prod-subnet-1
+      - name: prod-subnet-3
+    #tags:
+    #version:
+  providerConfigRef:
+    name: default

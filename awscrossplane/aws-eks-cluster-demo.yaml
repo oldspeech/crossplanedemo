@@ -1,0 +1,23 @@
+apiVersion: eks.aws.crossplane.io/v1beta1
+kind: Cluster
+metadata:
+  name: challengeaws-cluster
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    encryptionConfig:
+    logging:
+      clusterLogging:
+        - enabled: false
+    region: us-east-2
+    resourcesVpcConfig:
+      securityGroupIdRefs:
+        - name: access-sg
+      subnetIdRefs:
+        - name: prod-subnet-1
+        - name: prod-subnet-3
+    roleArn:
+    roleArnRef:
+      name: eksClusterRole
+  providerConfigRef:
+    name: default

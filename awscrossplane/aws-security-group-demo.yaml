@@ -1,0 +1,26 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: access-sg
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdRef:
+      name: production-vpc 
+    groupName: pods-access-sg
+    #description:  
+    tags:
+    - key: Environment
+      value: Production
+    - key: Owner
+      value: Oldspeech
+    - key: Name
+      value: access-sg
+    ingress:
+      - fromPort: 1
+        toPort: 35000
+        ipProtocol: tcp
+        ipRanges:
+          - cidrIp: 0.0.0.0/0
+  providerConfigRef:
+    name: default
